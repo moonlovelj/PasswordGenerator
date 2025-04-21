@@ -4,17 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Argon2id 密码生成器</title>
-    <script src="node_modules/argon2-browser/lib/argon2.js"></script>
+    <script>
+        // 设置wasm文件路径
+        window.argon2WasmPath = 'js/argon2.wasm';
+    </script>
+    <script src="js/argon2.js"></script>
     <script>
         window.addEventListener('load', function() {
             if (typeof argon2 === 'undefined') {
-                console.error('Argon2库加载失败，尝试使用备用CDN');
-                const fallbackScript = document.createElement('script');
-                fallbackScript.src = "node_modules/argon2-browser/lib/argon2.js";
-                fallbackScript.onerror = function() {
-                    alert('无法加载Argon2库。请检查您的网络连接或尝试使用最新的浏览器。');
-                };
-                document.head.appendChild(fallbackScript);
+                console.error('Argon2库加载失败');
+                // const fallbackScript = document.createElement('script');
+                // fallbackScript.src = "node_modules/argon2-browser/lib/argon2.js";
+                // fallbackScript.onerror = function() {
+                //     alert('无法加载Argon2库。请检查您的网络连接或尝试使用最新的浏览器。');
+                // };
+                // document.head.appendChild(fallbackScript);
             }
         });
     </script>
