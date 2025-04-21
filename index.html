@@ -6,13 +6,14 @@
     <title>Argon2id 密码生成器</title>
     <script>
         // 设置wasm文件路径
-        window.argon2WasmPath = 'argon2-browser/dist/argon2.wasm';
+        window.argon2WasmPath = 'node_modules/argon2-browser/dist/argon2.wasm';
     </script>
-    <script src="argon2-browser/lib/argon2.js"></script>
+    <script src="node_modules/argon2-browser/lib/argon2.js"></script>
     <script>
         window.addEventListener('load', function() {
             if (typeof argon2 === 'undefined') {
                 console.error('Argon2库加载失败');
+                alert("Argon2库加载失败");
                 // const fallbackScript = document.createElement('script');
                 // fallbackScript.src = "node_modules/argon2-browser/lib/argon2.js";
                 // fallbackScript.onerror = function() {
