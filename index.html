@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Argon2id 密码生成器</title>
-    <script src="lib/argon2.js" 
+    <script src="argon2-browser-1.18.0/package/lib/argon2.js" 
             integrity="sha256-LLPu8Uey0hbHNpg9oKYl/wQPLx2xE/yB8V0FeGolLLI=" 
             crossorigin="anonymous"></script>
     <script>
@@ -12,7 +12,7 @@
             if (typeof argon2 === 'undefined') {
                 console.error('Argon2库加载失败，尝试使用备用CDN');
                 const fallbackScript = document.createElement('script');
-                fallbackScript.src = "lib/argon2.js";
+                fallbackScript.src = "argon2-browser-1.18.0/package/lib/argon2.js";
                 fallbackScript.onerror = function() {
                     alert('无法加载Argon2库。请检查您的网络连接或尝试使用最新的浏览器。');
                 };
