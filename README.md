@@ -1,4 +1,4 @@
-# Argon2id Password Generator
+# Argon2id 密码生成器
 
 这是一个基于Argon2id密钥派生函数的安全密码生成工具。该工具可以从您的主密码（记忆密码）和服务标识符（区分密码）派生出强密码，无需存储任何密码。
 
@@ -7,80 +7,40 @@
 - 使用Argon2id密钥派生函数（2015年密码哈希竞赛获胜者）
 - 对每个服务生成唯一且可重复的密码
 - 可自定义密码长度和字符集（大小写字母、数字、特殊字符）
-- 命令行界面，易于使用
-- 不存储任何密码，完全基于您输入的信息进行派生
+- 方便的Web界面，无需安装
+- 不存储任何密码，完全在浏览器本地运行
 - 可调整的安全参数（内存成本、时间成本、并行度）
-
-## 安装
-
-1. 克隆这个仓库：
-```
-git clone https://github.com/yourusername/argon2-password-generator.git
-cd argon2-password-generator
-```
-
-2. 安装依赖：
-```
-pip install -r argon2_password_generator_requirements.txt
-```
 
 ## 使用方法
 
-### 基本用法
+### 在线使用
 
-```
-python argon2_password_generator.py -s github.com -l 20
-```
+访问 [https://moonlovelj.github.io/PasswordGenerator/](https://moonlovelj.github.io/PasswordGenerator/) 即可在线使用该工具。
 
-这将提示您输入主密码，然后为"github.com"生成一个20字符长的密码。
+### 界面使用说明
 
-### 命令行选项
+1. 输入您的主密码 - 这是您需要记住的密码
+2. 输入服务标识符 - 这是用来区分不同网站/应用的标识，如"github.com"
+3. 选择密码长度和字符集选项
+4. 点击"生成密码"按钮
+5. 使用"复制"按钮将生成的密码复制到剪贴板
 
-```
-usage: argon2_password_generator.py [-h] [-s SERVICE] [-l LENGTH] [--no-lowercase] [--no-uppercase] [--no-digits] [--no-special] [-m MEMORY] [-t TIME] [-p PARALLELISM]
+## 高级选项
 
-Generate secure passwords using Argon2id
+您可以调整以下安全参数来增强安全性：
 
-options:
-  -h, --help            显示帮助信息并退出
-  -s SERVICE, --service SERVICE
-                        服务或网站标识符
-  -l LENGTH, --length LENGTH
-                        密码长度 (默认: 16)
-  --no-lowercase        排除小写字母
-  --no-uppercase        排除大写字母
-  --no-digits           排除数字
-  --no-special          排除特殊字符
-  -m MEMORY, --memory MEMORY
-                        内存成本 (默认: 65536 KiB)
-  -t TIME, --time TIME  时间成本 (默认: 3)
-  -p PARALLELISM, --parallelism PARALLELISM
-                        并行度 (默认: 4)
-```
+- **内存成本**：用于哈希计算的内存量，默认为65536 KiB
+- **时间成本**：哈希迭代次数，默认为3
+- **并行度**：并行计算的线程数，默认为4
 
-### 示例
-
-1. 生成包含所有字符类型的24字符密码：
-```
-python argon2_password_generator.py -s amazon.com -l 24
-```
-
-2. 生成只包含字母和数字的16字符密码：
-```
-python argon2_password_generator.py -s gmail.com --no-special
-```
-
-3. 生成只包含大写字母和数字的12字符密码：
-```
-python argon2_password_generator.py -s bank.com -l 12 --no-lowercase --no-special
-```
+增加这些参数会提高生成密码的安全性，但也会增加生成密码所需的时间和资源。
 
 ## 安全注意事项
 
 - 主密码应当复杂且长度足够（建议至少12个字符）
 - 服务标识符应当唯一且一致，建议使用完整域名
 - 增加内存和时间成本参数可以提高安全性，但会增加密码生成的时间
-- 建议在本地执行，不要在不可信的系统上使用
+- 所有处理都在本地浏览器中完成，您的主密码不会被发送到任何服务器
 
 ## 工作原理
 
