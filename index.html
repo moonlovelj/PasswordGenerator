@@ -129,6 +129,20 @@
         .password-wrapper {
             flex-grow: 1;
         }
+        .toggle-btn {
+            background-color: #7f8c8d;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 10px;
+            width: auto;
+        }
+        .toggle-btn:hover {
+            background-color: #95a5a6;
+        }
     </style>
 </head>
 <body>
@@ -137,7 +151,10 @@
         
         <div class="form-group">
             <label for="masterPassword">主密码 (记忆密码):</label>
-            <input type="password" id="masterPassword" placeholder="输入您的主密码" required>
+            <div style="display: flex; align-items: center;">
+                <input type="password" id="masterPassword" placeholder="输入您的主密码" required style="flex-grow: 1;">
+                <button type="button" id="togglePassword" class="toggle-btn">显示</button>
+            </div>
         </div>
         
         <div class="form-group">
@@ -218,9 +235,22 @@
             const copyBtn = document.getElementById('copyBtn');
             const result = document.getElementById('result');
             const passwordDisplay = document.getElementById('passwordDisplay');
+            const togglePasswordBtn = document.getElementById('togglePassword');
+            const masterPasswordInput = document.getElementById('masterPassword');
             
             generateBtn.addEventListener('click', generatePassword);
             copyBtn.addEventListener('click', copyPassword);
+            
+            // 添加显示/隐藏密码功能
+            togglePasswordBtn.addEventListener('click', function() {
+                if (masterPasswordInput.type === 'password') {
+                    masterPasswordInput.type = 'text';
+                    togglePasswordBtn.textContent = '隐藏';
+                } else {
+                    masterPasswordInput.type = 'password';
+                    togglePasswordBtn.textContent = '显示';
+                }
+            });
             
             async function generatePassword() {
                 const masterPassword = document.getElementById('masterPassword').value;
@@ -296,7 +326,7 @@
                         useSpecial
                     );
                     
-                    // 显示结果
+                    // 显示结果 - 直接显示密码，不添加空格
                     passwordDisplay.textContent = password;
                     result.classList.remove('hidden');
                 } catch (error) {
@@ -370,6 +400,7 @@
             
             function copyPassword() {
                 const password = passwordDisplay.textContent;
+                
                 navigator.clipboard.writeText(password)
                     .then(() => {
                         const originalText = copyBtn.textContent;
